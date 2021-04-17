@@ -43,6 +43,8 @@ func (p *Api) Run(ctx context.Context, port int) {
 		log.WithField("Addr", server.Addr).
 			Info("Pong API is starting")
 
+		http.HandleFunc("/", helloWorld)
+
 		err := server.ListenAndServe()
 		if err != nil && err != http.ErrServerClosed {
 			log.WithError(err).
