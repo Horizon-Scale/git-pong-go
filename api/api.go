@@ -20,7 +20,7 @@ func (p *Api) Run(ctx context.Context, port int) {
 		ReadTimeout:    10 * time.Second,
 		WriteTimeout:   10 * time.Second,
 		MaxHeaderBytes: 1 << 16,
-		Handler:        nil,
+		Handler:        http.HandlerFunc(helloWorld),
 	}
 
 	// shutdown the server if context returns
@@ -42,8 +42,6 @@ func (p *Api) Run(ctx context.Context, port int) {
 	go func() {
 		log.WithField("Addr", server.Addr).
 			Info("Pong API is starting")
-
-		http.HandleFunc("/", helloWorld)
 
 		err := server.ListenAndServe()
 		if err != nil && err != http.ErrServerClosed {

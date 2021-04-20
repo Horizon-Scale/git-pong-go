@@ -9,8 +9,9 @@ See Makefile targets
 
 ## Next
 
-- Add HelloWorld http handler
+- Add middleware counting api calls
 
 ## Changlog
 
+- Add HelloWorld http handler
 - Bootstrap Api server
