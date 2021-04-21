@@ -3,6 +3,7 @@ package api
 import (
 	"context"
 	"fmt"
+	middleware "git-pong-go/middlewares/counter"
 	"net/http"
 	"time"
 
@@ -20,7 +21,7 @@ func (p *Api) Run(ctx context.Context, port int) {
 		ReadTimeout:    10 * time.Second,
 		WriteTimeout:   10 * time.Second,
 		MaxHeaderBytes: 1 << 16,
-		Handler:        http.HandlerFunc(helloWorld),
+		Handler:        http.HandlerFunc(middleware.MiddlewareCounter(helloWorld)),
 	}
 
 	// shutdown the server if context returns
