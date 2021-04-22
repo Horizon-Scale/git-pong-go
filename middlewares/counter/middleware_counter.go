@@ -13,9 +13,10 @@ var (
 
 func MiddlewareCounter(next http.HandlerFunc) http.HandlerFunc {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		newCounter := atomic.AddUint64(&counter, 1)
+		count := atomic.AddUint64(&counter, 1)
 
-		log.Info(newCounter, " request(s) since the start of the app.")
+		log.WithField("Count", count).
+			Trace("Total request(s) count")
 		next.ServeHTTP(w, r)
 	})
 }
